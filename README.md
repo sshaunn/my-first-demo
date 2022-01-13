@@ -2,4 +2,5 @@
 
 
 ## version
-###firebase ^8.10.0
+### firebase ^8.10.0
+### run server command: npm run start
