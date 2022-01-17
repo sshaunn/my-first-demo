@@ -1,4 +1,5 @@
-const tasksObject = (arr, key) => {
+//json format function array to object, property = item.id
+const arrayToObject = (arr, key) => {
     return arr.reduce((obj, item) => {
         return {
             ...obj,
@@ -6,4 +7,4 @@ const tasksObject = (arr, key) => {
         };
     }, {});
 }
-module.exports = tasksObject;
+module.exports = arrayToObject;

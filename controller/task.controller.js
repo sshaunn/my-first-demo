@@ -1,10 +1,9 @@
 const firebase = require('../firebase');
-const Task = require('../model/task');
 const firestore = firebase.firestore();
-const tasksObject = require('./json.formatter');
+const arrayToObject = require('../format/json.formatter');
 
 
-const addTask = async (req, res, next) => {
+const addTask = async (req, res) => {
     try {
         const data = req.body;
         firestore.collection('tasks').doc().set(data);
@@ -14,7 +13,7 @@ const addTask = async (req, res, next) => {
     }
 }
 
-const getAllTasks = async (req, res, next) => {
+const getAllTasks = async (req, res) => {
     try {
         const tasks = firestore.collection('tasks');
         const data = await tasks.get();
@@ -24,7 +23,7 @@ const getAllTasks = async (req, res, next) => {
         } else {
 
             data.forEach(doc => {
-                
+
                 const task = {
                     id: doc.id,
                     'taskName': doc.data().taskName,
@@ -33,9 +32,9 @@ const getAllTasks = async (req, res, next) => {
                 };
                 tasksArray.push(task);
             });
-            
-            console.log(tasksObject(tasksArray, 'id'));
-            res.send(tasksObject(tasksArray, 'id'));
+
+            //console.log(tasksObject(tasksArray, 'id'));
+            res.send(arrayToObject(tasksArray, 'id'));
         }
     } catch (error) {
         res.status(400).send(error.message);
@@ -43,7 +42,7 @@ const getAllTasks = async (req, res, next) => {
 }
 
 
-const getTask = async (req, res, next) => {
+const getTask = async (req, res) => {
     try {
         const id = req.params.id;
         const task = firestore.collection('tasks').doc(id);
@@ -58,7 +57,7 @@ const getTask = async (req, res, next) => {
     }
 }
 
-const updateTask = async (req, res, next) => {
+const updateTask = async (req, res) => {
     try {
         const id = req.params.id;
         const data = req.body;
