@@ -1,6 +1,7 @@
 const firebase = require('../firebase');
 const Task = require('../model/task');
 const firestore = firebase.firestore();
+const tasksObject = require('./json.formatter');
 
 
 const addTask = async (req, res, next) => {
@@ -18,30 +19,28 @@ const getAllTasks = async (req, res, next) => {
         const tasks = firestore.collection('tasks');
         const data = await tasks.get();
         let tasksArray = [];
-        if(data.empty) {
+        if (data.empty) {
             res.status(404).send('No task record found...');
-        }else {
-            
-            //tasksArray = data.task.map(doc => {
-            //    const { taskName, taskType, status } = doc.data()
-	        //    const task = new Task(doc.id, taskName, taskType, status)
-	        //    return task;
-            //})
+        } else {
+
             data.forEach(doc => {
-                const task = new Task(
-                    doc.id,
-                    doc.data().taskName,
-                    doc.data().taskType,
-                    doc.data().status
-                );
+                
+                const task = {
+                    id: doc.id,
+                    'taskName': doc.data().taskName,
+                    'taskType': doc.data().taskType,
+                    'status': doc.data().status
+                };
                 tasksArray.push(task);
             });
-            res.send(tasksArray);
+            
+            console.log(tasksObject(tasksArray, 'id'));
+            res.send(tasksObject(tasksArray, 'id'));
         }
-        }catch (error) {
-            res.status(400).send(error.message);
-        }
+    } catch (error) {
+        res.status(400).send(error.message);
     }
+}
 
 
 const getTask = async (req, res, next) => {
@@ -49,9 +48,9 @@ const getTask = async (req, res, next) => {
         const id = req.params.id;
         const task = firestore.collection('tasks').doc(id);
         const data = await task.get();
-        if(!data.exists) {
+        if (!data.exists) {
             res.status(404).send('Task not found...');
-        }else {
+        } else {
             res.send(data.data());
         }
     } catch (error) {
@@ -65,7 +64,7 @@ const updateTask = async (req, res, next) => {
         const data = req.body;
         const task = firestore.collection('tasks').doc(id);
         await task.update(data);
-        res.send('Task record updated successfully...');        
+        res.send('Task record updated successfully...');
     } catch (error) {
         res.status(400).send(error.message);
     }
