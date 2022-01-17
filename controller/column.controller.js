@@ -16,7 +16,7 @@ async function addColumn(req, res) {
     return res.status(201).json(column)
 }
 
-async function getAllColumns(req, res) {
+async function getAllColumns(res) {
     try {
         const columns = firestore.collection('columns');
         const data = await columns.get();
