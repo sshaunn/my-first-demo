@@ -26,14 +26,15 @@ const getAllTasks = async (req, res) => {
 
                 const task = {
                     id: doc.id,
+                    'columnId': doc.data().columnId,
                     'taskName': doc.data().taskName,
                     'taskType': doc.data().taskType,
                     'status': doc.data().status
                 };
                 tasksArray.push(task);
             });
-
-            //console.log(tasksObject(tasksArray, 'id'));
+            
+            console.log(arrayToObject(tasksArray, 'id'));
             res.send(arrayToObject(tasksArray, 'id'));
         }
     } catch (error) {
