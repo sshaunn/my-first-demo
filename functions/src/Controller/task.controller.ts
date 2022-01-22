@@ -111,7 +111,12 @@ async function deleteTask(req: Request, res: Response) {
     }
 }
 
-export { addTask, getAllTasks, updateTask, deleteTask };
+export { 
+    addTask, 
+    getAllTasks, 
+    updateTask, 
+    deleteTask 
+};
 
 
 
