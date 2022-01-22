@@ -8,11 +8,6 @@
     "strict": true,
     "target": "es2017"
   },
-  "parserOptions": {
-    "project": "tsconfig.json",
-    "tsconfigRootDir": __dirname,
-    "sourceType": "module",
-  },
   "compileOnSave": true,
   "include": [
     "src"
