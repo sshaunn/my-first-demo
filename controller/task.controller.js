@@ -6,7 +6,7 @@ const firestore = firebase.firestore();
 const addTask = async (req, res, next) => {
     try {
         const data = req.body;
-        await firestore.collection('tasks').doc().set(data);
+        firestore.collection('tasks').doc().set(data);
         res.send('New Task saved successfully...');
     } catch (error) {
         res.status(400).send(error.message);
@@ -15,12 +15,18 @@ const addTask = async (req, res, next) => {
 
 const getAllTasks = async (req, res, next) => {
     try {
-        const tasks = await firestore.collection('tasks');
+        const tasks = firestore.collection('tasks');
         const data = await tasks.get();
-        const tasksArray = [];
+        let tasksArray = [];
         if(data.empty) {
             res.status(404).send('No task record found...');
         }else {
+            
+            //tasksArray = data.task.map(doc => {
+            //    const { taskName, taskType, status } = doc.data()
+	        //    const task = new Task(doc.id, taskName, taskType, status)
+	        //    return task;
+            //})
             data.forEach(doc => {
                 const task = new Task(
                     doc.id,
@@ -32,15 +38,16 @@ const getAllTasks = async (req, res, next) => {
             });
             res.send(tasksArray);
         }
-    } catch (error) {
-        res.status(400).send(error.message);
+        }catch (error) {
+            res.status(400).send(error.message);
+        }
     }
-}
+
 
 const getTask = async (req, res, next) => {
     try {
         const id = req.params.id;
-        const task = await firestore.collection('tasks').doc(id);
+        const task = firestore.collection('tasks').doc(id);
         const data = await task.get();
         if(!data.exists) {
             res.status(404).send('Task not found...');
@@ -56,7 +63,7 @@ const updateTask = async (req, res, next) => {
     try {
         const id = req.params.id;
         const data = req.body;
-        const task =  await firestore.collection('tasks').doc(id);
+        const task = firestore.collection('tasks').doc(id);
         await task.update(data);
         res.send('Task record updated successfully...');        
     } catch (error) {

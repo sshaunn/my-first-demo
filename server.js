@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use(taskRouter.router);
+app.use('/api', taskRouter.router);
 
 app.listen(config.port, () => {
     console.log(`Listening on ${config.port}`)
