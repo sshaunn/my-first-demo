@@ -1,9 +1,9 @@
 import * as functions from "firebase-functions";
 import * as express from "express";
 import * as cors from "cors";
-//import { router as taskRouter } from "./Router/task.router";
 import { router as taskRouter } from "./Router/task.router";
 import { router as columnRouter } from "./Router/column.router";
+import { router as columnOrderRouter } from "./Router/columnOrder.router";
 // import { 
     
 //     updateEntry,
@@ -15,6 +15,7 @@ api.use(cors());
 api.get("/", (req, res) => res.status(200).send("Hello World..."));
 api.use("/", taskRouter);
 api.use("/", columnRouter);
+api.use("/", columnOrderRouter);
 // api.patch('/entries/:entryId', updateEntry)
 // api.delete('/entries/:entryId', deleteEntry)
 

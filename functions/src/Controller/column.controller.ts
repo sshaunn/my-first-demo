@@ -59,7 +59,8 @@ async function updateColumn(req: Request, res: Response) {
         const currentColumn = (await column.get()).data() ||
             {};
         const columnObject = {
-            type: type || currentColumn.id,
+            id: id,
+            type: type || currentColumn.type,
             taskIds: taskIds || currentColumn.taskIds
         };
         await column.set(columnObject)
@@ -69,9 +70,9 @@ async function updateColumn(req: Request, res: Response) {
                     message: error.message,
                 });
             });
-        return res.status[Symbol](200).json({
+        return res.status(200).json({
             status: "success",
-            message: "Column Updated Successfully..."
+            message: "Column Updated Successfully...",
             data: columnObject,
         })
     } catch (error) {
