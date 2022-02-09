@@ -1,0 +1,1 @@
+{"version":3,"file":"firebase.js","sourceRoot":"","sources":["../../src/Config/firebase.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;AAAA,sDAAwC;AAUhC,sBAAK;AATb,kDAAkD;AAClD,kFAAoD;AAEpD,KAAK,CAAC,aAAa,CAAC;IAChB,UAAU,EAAE,KAAK,CAAC,UAAU,CAAC,IAAI,CAAC,8BAAc,CAAC;IACjD,WAAW,EAAE,mCAAmC;CACnD,CAAC,CAAA;AACF,MAAM,EAAE,GAAG,KAAK,CAAC,SAAS,EAAE,CAAC;AAEd,gBAAE"}

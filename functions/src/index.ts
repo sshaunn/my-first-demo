@@ -1,6 +1,6 @@
 import * as functions from "firebase-functions";
-import * as express from "express";
-import * as cors from "cors";
+import express from "express";
+import cors from "cors";
 import { router as taskRouter } from "./Router/task.router";
 import { router as columnRouter } from "./Router/column.router";
 import { router as columnOrderRouter } from "./Router/columnOrder.router";

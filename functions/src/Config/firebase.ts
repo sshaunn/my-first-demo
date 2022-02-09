@@ -1,13 +1,11 @@
 import * as admin from "firebase-admin";
-import * as functions from "firebase-functions";
+//import * as functions from "firebase-functions";
+import serviceAccount from "./service_account.json";
 
 admin.initializeApp({
-    credential: admin.credential.cert({
-        privateKey: functions.config().private.key.replace(/\\n/g, '\n'),
-        projectId: functions.config().project.id,
-        clientEmail: functions.config().client.email
-    }),
-    databaseURL: "https://first-demo.firebaseio.com"
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://fir-local-a695e.firebaseio.com",
+    storageBucket: "fir-local-a695e.appspot.com"
 })
 const db = admin.firestore();
 
