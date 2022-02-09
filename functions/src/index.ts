@@ -4,6 +4,7 @@ import cors from "cors";
 import { router as taskRouter } from "./Router/task.router";
 import { router as columnRouter } from "./Router/column.router";
 import { router as columnOrderRouter } from "./Router/columnOrder.router";
+import { router as imageRouter } from "./Router/image.router";
 // import { 
     
 //     updateEntry,
@@ -16,6 +17,7 @@ api.get("/", (req, res) => res.status(200).send("Hello World..."));
 api.use("/", taskRouter);
 api.use("/", columnRouter);
 api.use("/", columnOrderRouter);
+api.use("/", imageRouter)
 // api.patch('/entries/:entryId', updateEntry)
 // api.delete('/entries/:entryId', deleteEntry)
 
